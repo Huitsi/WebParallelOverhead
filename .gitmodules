@@ -1,0 +1,5 @@
+#Copyright © 2020 Linus Vanas <linus@vanas.fi>
+#SPDX-License-Identifier: MIT
+[submodule "ParallelOverhead"]
+	path = ParallelOverhead
+	url = https://huitsi.net:61734/Huitsi/ParallelOverhead.git
