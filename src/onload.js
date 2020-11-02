@@ -18,16 +18,14 @@ onload = function()
 	ErrorDiv.innerText = "Loading resources...";
 	text = r => r.ok ? r.text() : Promise.reject(r);
 	image = r => r.ok ? r.blob().then(b => createImageBitmap(b)) : Promise.reject(r);
-	blob = r => r.ok ? r.blob().then(b => true) : Promise.reject(r);
 	const resource_promises =
 	[
 		fetch("data/vertex.glsl").then(text),
 		fetch("data/fragment.glsl").then(text),
 		fetch("data/ship.bmp").then(image),
-		fetch("data/move.wav").then(blob),
-		fetch("data/death.wav").then(blob),
-		fetch("data/fast_pulse.wav").then(blob)
 	];
+
+	init_audio();
 
 	Promise.all(resource_promises).then(init_GL, report_resource_error);
 }

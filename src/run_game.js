@@ -9,7 +9,7 @@ function run_game()
 	const sector_angle = FULL_ANGLE/Settings.game.sectors;
 
 	reset_level();
-	//reset_music();
+	reset_music();
 
 	const ships = [];
 	for (let i = 0; i < Settings.game.ships; i++)
@@ -91,13 +91,13 @@ function run_game()
 		if (paused || !ships_alive)
 		{
 			ship_sector_delta = 0;
-			//pause_music(1);
+			pause_music(1);
 		}
 		else
 		{
 			time_survived += last_tick_time;
 			ship_ring += last_tick_time*speed;
-			//pause_music(0);
+			pause_music(0);
 		}
 
 		GL.clear(GL.COLOR_BUFFER_BIT);
@@ -133,7 +133,7 @@ function run_game()
 
 		if (ship_sector_delta)
 		{
-			//play_move_sound();
+			play_move_sound();
 		}
 
 		ships_alive = 0;
@@ -152,7 +152,7 @@ function run_game()
 				{
 					ships[i].alive = 0;
 					increase_difficulty();
-					//play_death_sound();
+					play_death_sound();
 					console.log("Ship lost after " + time_survived/1000. + " s (a distance of " + rings_survived + " rings).\n");
 					continue;
 				}
