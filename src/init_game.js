@@ -53,7 +53,6 @@ function init_game(resources)
 
 	//Ship texture
 	const ship_image = resources[2];
-	console.log(ship_image);
 
 	GL.bindTexture(GL.TEXTURE_2D, ship_texture);
 	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
@@ -73,7 +72,12 @@ function init_game(resources)
 
 	GL.clearColor(0,0,0,1);
 
-	GL.uniform2f(Locs.screen_wh, 480, 480); //TODO
+	const w = innerWidth;
+	const h = innerHeight;
+	Canvas.width = w;
+	Canvas.height = h;
+	GL.uniform2f(Locs.screen_wh, w, h);
+	GL.viewport(0,0,w,h);
 
 	GL.vertexAttribPointer(Locs.vertex_pos_polar, 3, GL.FLOAT, GL.FALSE, 0, 0);
 	GL.enableVertexAttribArray(Locs.vertex_pos_polar);
@@ -91,11 +95,11 @@ function init_game(resources)
 	}
 
 	addEventListener("keyup", push_event);
+	addEventListener("resize", push_event);
 	function push_event(e)
 	{
 		Events.push(e);
 	}
 
-	let timer_surface;
 	run_game();
 }

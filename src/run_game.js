@@ -53,14 +53,14 @@ function run_game()
 		{
 			switch (e.type)
 			{
-				/* TODO
-				case SDL_WINDOWEVENT:
-					//Window resize
-					SDL_GetWindowSize(window, &w, &h);
-					glUniform2f(Locs.screen_wh, w, h);
-					glViewport(0,0,w,h);
+				case "resize":
+					const w = innerWidth;
+					const h = innerHeight;
+					Canvas.width = w;
+					Canvas.height = h;
+					GL.uniform2f(Locs.screen_wh, w, h);
+					GL.viewport(0,0,w,h);
 					break;
-				*/
 				case "keyup":
 					switch (e.key)
 					{

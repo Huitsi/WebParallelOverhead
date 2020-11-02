@@ -4,7 +4,7 @@
 function init_GL(resources)
 {
 	ErrorDiv.innerText = "Preparing the WebGL program...";
-	console.log(resources)
+
 	const program = make_program(resources[0], resources[1]);
 	if (!program)
 	{
