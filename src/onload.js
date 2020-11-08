@@ -23,6 +23,7 @@ onload = function()
 		fetch("data/vertex.glsl").then(text),
 		fetch("data/fragment.glsl").then(text),
 		fetch("data/ship.bmp").then(image),
+		fetch("data/nums.bmp").then(image),
 	];
 
 	init_audio();

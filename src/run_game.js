@@ -165,13 +165,13 @@ function run_game()
 		}
 
 		//Render timer
-		/*render_time_and_distance(timer_surface, time_survived, rings_survived);
-		glBindTexture(GL_TEXTURE_2D, timer_texture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, timer_surface->w, timer_surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, timer_surface->pixels);
+		render_time_and_distance(time_survived, rings_survived);
+		GL.bindTexture(GL.TEXTURE_2D, timer_texture);
+		GL.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, HUDCanvas);
 
-		glUniform3f(Locs.object_pos_polar, 1, Settings.hud.sector * sector_angle, Settings.hud.depth);
-		glUniform2f(Locs.texture_area, -sector_angle, sector_angle);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);*/
+		GL.uniform3f(Locs.object_pos_polar, 1, Settings.hud.sector * sector_angle, Settings.hud.depth);
+		GL.uniform2f(Locs.texture_area, sector_angle, sector_angle);
+		GL.drawArrays(GL.TRIANGLE_STRIP, 0, 4);
 
 		requestAnimationFrame(frame);
 	}

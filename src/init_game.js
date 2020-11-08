@@ -3,6 +3,7 @@
  */
 const FULL_ANGLE = 2 * Math.PI;
 const Events = [], Textures = [];
+let HUDCanvas;
 
 function init_game(resources)
 {
@@ -55,21 +56,19 @@ function init_game(resources)
 	const ship_image = resources[2];
 
 	GL.bindTexture(GL.TEXTURE_2D, ship_texture);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
-
+	set_tex_paremeters();
 	GL.texImage2D(GL.TEXTURE_2D, 0, GL.RGBA, GL.RGBA, GL.UNSIGNED_BYTE, ship_image);
 
 	//Timer
-	/*init_hud();
-	SDL_Surface *timer_surface = SDL_CreateRGBSurface(0, 7*7+2*3+7*1, 2*11+1, 32, 0, 0, 0, 0);
-	glBindTexture(GL_TEXTURE_2D, timer_texture);
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	*/
+	HUDCanvas = document.createElement("canvas");
+	HUDCanvas.width = 7*7+2*3+7*1;
+	HUDCanvas.height = 2*11+1;
 
+	init_hud(HUDCanvas, resources[3]);
+	GL.bindTexture(GL.TEXTURE_2D, timer_texture);
+	set_tex_paremeters();
+
+	//Misc
 	GL.clearColor(0,0,0,1);
 
 	const w = innerWidth;
@@ -84,10 +83,8 @@ function init_game(resources)
 
 	//Wall texture
 	GL.bindTexture(GL.TEXTURE_2D, wall_texture);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
-	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
+	set_tex_paremeters();
+
 
 	if (report_GL_errors("Initializing the game"))
 	{
@@ -102,4 +99,15 @@ function init_game(resources)
 	}
 
 	run_game();
+}
+
+/**
+ * Set the texture parameters used by all textures for the currently bound TEXTURE_2D.
+ */
+function set_tex_paremeters()
+{
+	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MAG_FILTER, GL.NEAREST);
+	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_MIN_FILTER, GL.NEAREST);
+	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_S, GL.CLAMP_TO_EDGE);
+	GL.texParameteri(GL.TEXTURE_2D, GL.TEXTURE_WRAP_T, GL.CLAMP_TO_EDGE);
 }
