@@ -61,7 +61,11 @@ function run_game()
 					GL.uniform2f(Locs.screen_wh, w, h);
 					GL.viewport(0,0,w,h);
 					break;
-				case "keyup":
+				case "keydown":
+					if (e.repeat)
+					{
+						break;
+					}
 					switch (e.key)
 					{
 						case "ArrowRight":

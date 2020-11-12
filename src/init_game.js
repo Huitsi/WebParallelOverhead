@@ -91,7 +91,7 @@ function init_game(resources)
 		return;
 	}
 
-	addEventListener("keyup", push_event);
+	addEventListener("keydown", push_event);
 	addEventListener("resize", push_event);
 	function push_event(e)
 	{
